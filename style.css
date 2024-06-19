@@ -3,13 +3,12 @@ body, html {
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
   height: 100%;
+  scroll-behavior: smooth;
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
+  height: 100%;
   width: 100%;
-  margin: 0 auto;
   box-sizing: border-box;
   position: relative;
 }
@@ -94,45 +93,44 @@ body, html {
 
 /* Button Styles */
 .button {
-  width: 120px; /* Adjust width for text */
-  height: 40px; /* Adjust height for text */
+  display: inline-block; /* Ensure the button takes the correct space */
+  width: 120px;
+  height: 40px;
   background: #e8e8f348;
-  border-radius: 10px; /* Smooth rectangle shape */
-  position: absolute; /* Position absolute for animation */
-  bottom: 0; /* Start at the bottom of the menu */
-  left: 50%; /* Center horizontally */
-  transform: translateX(-50%); /* Center relative to its own width */
-  box-shadow: inherit; /* Inherit the menu's shadow */
-  opacity: 0; /* Hidden by default */
-  pointer-events: none; /* Non-clickable when hidden */
-  text-align: center; /* Center text inside */
-  line-height: 40px; /* Center text vertically */
-  font-size: 14px; /* Font size for the text */
-  color: #ffffffe1; /* Dark text color */
-  transition: opacity 0.3s ease, /* Slightly longer transition for opacity */
-              transform 0.4s cubic-bezier(0.19, 1, 0.22, 1); /* Ease-out for a smoother effect */
-  z-index: -1; /* Below other elements */
+  border-radius: 10px;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: inherit;
+  opacity: 0;
+  pointer-events: none;
+  text-align: center;
+  line-height: 40px;
+  font-size: 14px;
+  color: #ffffffe1;
+  transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  z-index: -1;
+  text-decoration: none; /* Ensure no underline */
 }
 
 .menu.open .button {
-  opacity: 1; /* Visible when menu is open */
-  pointer-events: auto; /* Clickable */
-  z-index: 1001; /* Ensure it stays above other content */
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 1001;
 }
 
-.menu.open .button:nth-of-type(1) {
+.menu.open .button:nth-child(1) {
   transform: translate(-50%, -60px) translateX(-100px); /* Bottom-left for triangular layout */
 }
 
-
-
-.menu.open .button:nth-of-type(2) {
+.menu.open .button:nth-child(2) {
   transform: translate(-50%, -60px) translateX(100px); /* Bottom-right for triangular layout */
 }
 
 .button:hover {
-  transform: translate(-50%, 0) scale(1.1); /* Scale up on hover, maintain position */
-  background: #ffffff9c; /* Change background color on hover for visual feedback */
+  transform: translate(-50%, 0) scale(1.1);
+  background: #ffffff9c;
 }
 
 /* Add these styles to your existing CSS */
@@ -176,12 +174,9 @@ body, html {
 }
 
 .content {
-  top: 100px;
+  position: relative;
   z-index: 100;
-  margin-top: 350px;
-  margin-right: 1300px;
   text-shadow: #000000;
-  background-size: 100;
 }
 
 /* Additional styles for the sections go here */
@@ -332,7 +327,6 @@ body, html {
 
     .content {
       top: 100px;
-      z-index: 100px;
       margin-top: -255px;
       margin-right: 30px;
     }
