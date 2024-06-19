@@ -65,17 +65,9 @@ function handleGesture() {
 document.querySelectorAll('video').forEach(video => {
     video.muted = true;
 
-    if (isMobile()) {
-        video.controls = false;
-
-        // Hide play button on mobile devices
-        video.addEventListener('play', () => {
-            video.removeAttribute('controls');
-        });
-    }
-
     video.addEventListener('play', () => {
         video.setAttribute('controls', '');
+        requestFullScreen(video);
     });
 
     video.addEventListener('pause', () => {
@@ -86,6 +78,18 @@ document.querySelectorAll('video').forEach(video => {
         video.removeAttribute('controls');
     });
 });
+
+function requestFullScreen(video) {
+    if (video.requestFullscreen) {
+        video.requestFullscreen();
+    } else if (video.mozRequestFullScreen) {
+        video.mozRequestFullScreen();
+    } else if (video.webkitRequestFullscreen) {
+        video.webkitRequestFullscreen();
+    } else if (video.msRequestFullscreen) {
+        video.msRequestFullscreen();
+    }
+}
 
 // Ensure video continues to play in background after closing popup
 function handleVideoPlayback() {
@@ -124,38 +128,12 @@ function playVideoFromStart(videoId) {
     if (video) {
         video.currentTime = 0;
         video.play().then(() => {
-            if (video.requestFullscreen) {
-                video.requestFullscreen();
-            } else if (video.mozRequestFullScreen) {
-                video.mozRequestFullScreen();
-            } else if (video.webkitRequestFullscreen) {
-                video.webkitRequestFullscreen();
-            } else if (video.msRequestFullscreen) {
-                video.msRequestFullscreen();
-            }
+            requestFullScreen(video);
         }).catch((error) => {
             console.error('Error attempting to play video:', error);
         });
     } else {
         console.error('Video element not found');
-    }
-}
-
-function showPopup(popupId) {
-    var popup = document.getElementById(popupId);
-    if (popup) {
-        popup.style.display = 'flex';
-    } else {
-        console.error('Popup element not found');
-    }
-}
-
-function hidePopup(popupId) {
-    var popup = document.getElementById(popupId);
-    if (popup) {
-        popup.style.display = 'none';
-    } else {
-        console.error('Popup element not found');
     }
 }
 
@@ -170,7 +148,7 @@ function isInViewport(element) {
     );
 }
 
-// Function to handle video playback based on scroll
+// Handle video playback based on scroll
 function handleVideoPlayback() {
     var sections = document.querySelectorAll('.section');
     sections.forEach(function(section) {
@@ -211,35 +189,12 @@ document.getElementById('scroll-button').addEventListener('click', function() {
     document.getElementById('community').scrollIntoView({ behavior: 'smooth' });
 });
 
-
 var accordionButtons = document.querySelectorAll('.accordion-button');
 accordionButtons.forEach(function(button) {
     button.addEventListener('click', function() {
         var content = this.nextElementSibling;
         content.classList.toggle('active');
     });
-});
-
-// Only play videos when in view
-function handleVideoPlayback() {
-    const videos = document.querySelectorAll('video');
-    videos.forEach((video) => {
-        if (isInViewport(video)) {
-            video.play();
-        } else {
-            video.pause();
-        }
-    });
-}
-
-// Mute videos by default
-document.querySelectorAll('video').forEach(video => {
-    video.muted = true;
-});
-
-// Add video controls
-document.querySelectorAll('video').forEach(video => {
-    video.setAttribute('controls', 'controls');
 });
 
 // Close popups on clicking outside
@@ -251,7 +206,6 @@ window.addEventListener('click', function(event) {
         }
     });
 });
-
 
 // Function to show the info popup
 function showInfoPopup() {
@@ -273,7 +227,6 @@ function hideInfoPopup() {
     }
 }
 
-
 function showJoinPopup() {
     var popup = document.getElementById('join-popup');
     if (popup) {
@@ -292,5 +245,3 @@ function hideJoinPopup() {
         console.error('Info popup element not found');
     }
 }
-
-
