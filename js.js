@@ -1,3 +1,9 @@
+// Function to detect mobile devices
+function isMobile() {
+    return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+}
+
+// Existing code
 document.addEventListener('wheel', function(event) {
     if (event.deltaY > 0) {
         window.scrollBy({
@@ -11,6 +17,76 @@ document.addEventListener('wheel', function(event) {
         });
     }
 });
+
+// New code to handle touch events for mobile
+let touchStartY = 0;
+let touchEndY = 0;
+
+document.addEventListener('touchstart', function(event) {
+    touchStartY = event.changedTouches[0].screenY;
+}, false);
+
+document.addEventListener('touchend', function(event) {
+    touchEndY = event.changedTouches[0].screenY;
+    handleGesture();
+}, false);
+
+function handleGesture() {
+    if (touchStartY - touchEndY > 50) {
+        // Swipe up
+        window.scrollBy({
+            top: window.innerHeight,
+            behavior: 'smooth',
+        });
+    } else if (touchEndY - touchStartY > 50) {
+        // Swipe down
+        window.scrollBy({
+            top: -window.innerHeight,
+            behavior: 'smooth'
+        });
+    }
+}
+
+// Mute videos by default and handle mobile controls
+document.querySelectorAll('video').forEach(video => {
+    video.muted = true;
+
+    // Disable controls on mobile devices
+    if (isMobile()) {
+        video.controls = false;
+    }
+
+    // Custom play and pause handling for mobile
+    video.addEventListener('play', () => {
+        video.setAttribute('controls', '');
+    });
+
+    video.addEventListener('pause', () => {
+        video.removeAttribute('controls');
+    });
+
+    video.addEventListener('ended', () => {
+        video.removeAttribute('controls');
+    });
+});
+
+// Ensure video continues to play in background after closing popup
+function handleVideoPlayback() {
+    const videos = document.querySelectorAll('video');
+    videos.forEach((video) => {
+        if (isInViewport(video)) {
+            video.play();
+        } else {
+            video.pause();
+        }
+    });
+}
+
+// Add event listener for scroll event
+window.addEventListener('scroll', handleVideoPlayback);
+
+// Initial call to handle video playback on page load
+handleVideoPlayback();
 
 // Function to randomize the video timestamp
 function randomizeVideoStartTime(videoId) {
