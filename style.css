@@ -1,0 +1,350 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  position: relative;
+}
+
+::-webkit-scrollbar {
+  width: 8px; /* Width of vertical scrollbar */
+  height: 8px; /* Height of horizontal scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* Track color */
+  border-radius: 10px; /* Rounded corners */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888; /* Scrollbar thumb color */
+  border-radius: 10px; /* Rounded corners */
+  border: 2px solid transparent; /* Space around the thumb */
+  background-clip: padding-box; /* Ensures space is visible */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color when hovering over the thumb */
+}
+
+/* Scrollbar Styles for Firefox */
+* {
+  scrollbar-width: thin; /* Thin scrollbar width */
+  scrollbar-color: #888 transparent; /* Thumb and track color */
+}
+
+/* Custom Scrollbar Styles for Edge (and IE 10+) */
+body, html {
+  -ms-overflow-style: none; /* No arrows in scrollbars */
+}
+
+.menu {
+  position: fixed; /* Fixed position to make it stay visible on scroll */
+  bottom: 30px; /* Positioned 30px from the bottom */
+  left: 50%; /* Centered horizontally */
+  transform: translateX(-50%); /* Offset by 50% of its width to center it */
+  padding: 30px; /* Padding inside the menu button */
+  background: #e8e8f348; /* Light background color */
+  border-radius: 100%; /* Circular shape */
+  cursor: pointer; /* Pointer cursor for clickability */
+  box-shadow: 2px 0px 5px rgba(55, 84, 170, 0.15), 
+              0px 0px 20px rgb(255, 255, 255), 
+              inset 10px 0px 5px rgba(5, 201, 77, 0), 
+              inset 10px 0px 2px rgba(255, 255, 255, 0), 
+              10px 10px 4px rgba(255, 255, 255, 0); /* Shadow effects for depth */
+  z-index: 1000; /* Ensure it's above other elements */
+  transition: opacity 2.3s ease, transform .3s ease; /* Slightly slower and smoother transition */
+}
+
+.menu::before, .menu::after {
+  content: "";
+  background: #ffffff; /* Color for the lines */
+  border-radius: 5px; /* Rounded edges */
+  width: 30px; /* Width of the lines */
+  height: 5px; /* Height of the lines */
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%); /* Center the lines */
+}
+
+.menu::before {
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
+.menu::after {
+  transform: translate(-50%, -50%) rotate(-90deg);
+}
+
+.menu.open::before {
+  transform: translate(-50%, -50%) rotate(45deg); /* Rotate to form 'X' */
+}
+
+.menu.open::after {
+  transform: translate(-50%, -50%) rotate(-45deg); /* Rotate to form 'X' */
+}
+
+/* Button Styles */
+.button {
+  width: 120px; /* Adjust width for text */
+  height: 40px; /* Adjust height for text */
+  background: #e8e8f348;
+  border-radius: 10px; /* Smooth rectangle shape */
+  position: absolute; /* Position absolute for animation */
+  bottom: 0; /* Start at the bottom of the menu */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Center relative to its own width */
+  box-shadow: inherit; /* Inherit the menu's shadow */
+  opacity: 0; /* Hidden by default */
+  pointer-events: none; /* Non-clickable when hidden */
+  text-align: center; /* Center text inside */
+  line-height: 40px; /* Center text vertically */
+  font-size: 14px; /* Font size for the text */
+  color: #ffffffe1; /* Dark text color */
+  transition: opacity 0.3s ease, /* Slightly longer transition for opacity */
+              transform 0.4s cubic-bezier(0.19, 1, 0.22, 1); /* Ease-out for a smoother effect */
+  z-index: -1; /* Below other elements */
+}
+
+.menu.open .button {
+  opacity: 1; /* Visible when menu is open */
+  pointer-events: auto; /* Clickable */
+  z-index: 1001; /* Ensure it stays above other content */
+}
+
+.menu.open .button:nth-of-type(1) {
+  transform: translate(-50%, -60px) translateX(-100px); /* Bottom-left for triangular layout */
+}
+
+
+
+.menu.open .button:nth-of-type(2) {
+  transform: translate(-50%, -60px) translateX(100px); /* Bottom-right for triangular layout */
+}
+
+.button:hover {
+  transform: translate(-50%, 0) scale(1.1); /* Scale up on hover, maintain position */
+  background: #ffffff9c; /* Change background color on hover for visual feedback */
+}
+
+/* Add these styles to your existing CSS */
+/* Add these styles to your existing CSS */
+.section {
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  padding: 25px;
+  display: flex;
+  align-items: center;
+  color: #ffffff; /* Set default text color to white */
+}
+
+/* Invert text color when section has a background image */
+.section.has-background {
+  filter: invert(100%);
+}
+
+.video-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.section-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the video */
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+}
+
+.content {
+  top: 100px;
+  z-index: 100;
+  margin-top: 350px;
+  margin-right: 1300px;
+  text-shadow: #000000;
+  background-size: 100;
+}
+
+/* Additional styles for the sections go here */
+#section1 { background: #f8b400; }
+#section2 { background-color: #6a0572; }
+#section3 { background-color: #4a90e2; }
+#section4 { background-color: #50c878; }
+#section5 { background-color: #ff6f61; }
+
+.header h2, .header .author, .description {
+  color: inherit;
+}
+
+
+.header .author {
+  font-size: 30px;
+}
+
+.header .author {
+  font-size: 20px;
+}
+
+.header .description {
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+
+.video-btn{
+ width: 100px;
+  height: 45px;
+  border: none;
+  color: #ffffff;
+  background: #e8e8f348; /* Light background color */
+  font-size: 20px;
+  cursor: pointer;
+  bottom: 25px;
+  right: 25px;
+  margin-right: 20px;
+  border-radius: 10px;
+  box-shadow: 2px 0px 5px rgba(55, 84, 170, 0.15), 
+              0px 0px 5px rgb(255, 255, 255), 
+              inset 10px 0px 5px rgba(5, 201, 77, 0), 
+              inset 10px 0px 2px rgba(255, 255, 255, 0), 
+              10px 10px 4px rgba(255, 255, 255, 0); /* Shadow effects for depth */
+}
+.video-btn:hover {
+  background: #ffffff9c; /* Change background color on hover for visual feedback */
+}
+
+.popup-btn {
+  width: 100px;
+  height: 45px;
+  border: none;
+  color: #ffffff;
+  background: #e8e8f348; /* Light background color */
+  font-size: 20px;
+  cursor: pointer;
+  bottom: 205px;
+  margin-right: 20px;
+  right: 25px;
+  border-radius: 10px;
+  box-shadow: 2px 0px 5px rgba(55, 84, 170, 0.15), 
+              0px 0px 5px rgb(255, 255, 255), 
+              inset 10px 0px 5px rgba(5, 201, 77, 0), 
+              inset 10px 0px 2px rgba(255, 255, 255, 0), 
+              10px 10px 4px rgba(255, 255, 255, 0); /* Shadow effects for depth */
+}
+.popup-btn:hover {
+  background: #ffffff9c; /* Change background color on hover for visual feedback */
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw; /* Full viewport width */
+  height: 100vh; /* Full viewport height */
+  background-color: rgba(161, 161, 161, 0.61); /* Semi-transparent background */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Higher z-index to ensure it's on top */
+  overflow: hidden; /* Prevent scrolling on the body when popup is open */
+}
+
+.popup-content {
+  background-color: rgb(255, 255, 255); /* White background for content */
+  font-size: 20px;
+  color: #000000;
+  max-width: 80%; /* Limit width if needed */
+  max-height: 80%; /* Limit height if needed */
+  overflow-y: auto; /* Enable vertical scrolling if content exceeds height */
+  padding: 20px;
+  border-radius: 5px;
+  text-align: left;
+  position: relative; /* Use relative positioning within fixed parent */
+}
+
+.popup .close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 40px;
+  cursor: pointer;
+}
+
+
+/* Responsive styles */
+@media (max-width: 1440px) {
+  .section {
+    height: 100vh;
+  }
+  .section-video {
+    position: relative; /* Ensure relative positioning */
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    min-width: 100%;
+    min-height: 100%;
+  }
+
+  .popup-btn {
+    width: 50%;
+    height: auto;
+    padding: 10px;
+  }
+
+  .popup-content {
+    width: 80%;
+    height: 50%;
+    padding: 20px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 1440px) {
+
+  .video-btn {
+    margin-top: 10px;
+    width: 50%;
+    height: auto;
+    padding: 10px;
+  }
+
+  }
+  @media (max-width: 1440px) {
+
+    .content {
+      top: 100px;
+      z-index: 100px;
+      margin-top: -255px;
+      margin-right: 30px;
+    }
+    
+  
+    }
+    @media (max-width: 1440px) {
+
+      .video-container {
+        position: left;
+      }
+      
+    
+      }
+    
