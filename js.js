@@ -1,3 +1,9 @@
+// Function to detect mobile devices
+function isMobile() {
+    return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+}
+
+// Handle scrolling with precise snapping
 document.addEventListener('wheel', function(event) {
     if (event.deltaY > 0) {
         window.scrollBy({
@@ -10,16 +16,100 @@ document.addEventListener('wheel', function(event) {
             behavior: 'smooth'
         });
     }
+
+    setTimeout(() => {
+        const scrollPosition = Math.round(window.scrollY / window.innerHeight) * window.innerHeight;
+        window.scrollTo({
+            top: scrollPosition,
+            behavior: 'smooth'
+        });
+    }, 500);
 });
+
+// Handle touch events for mobile
+let touchStartY = 0;
+let touchEndY = 0;
+
+document.addEventListener('touchstart', function(event) {
+    touchStartY = event.changedTouches[0].screenY;
+}, false);
+
+document.addEventListener('touchend', function(event) {
+    touchEndY = event.changedTouches[0].screenY;
+    handleGesture();
+}, false);
+
+function handleGesture() {
+    if (touchStartY - touchEndY > 50) {
+        window.scrollBy({
+            top: window.innerHeight,
+            behavior: 'smooth',
+        });
+    } else if (touchEndY - touchStartY > 50) {
+        window.scrollBy({
+            top: -window.innerHeight,
+            behavior: 'smooth'
+        });
+    }
+
+    setTimeout(() => {
+        const scrollPosition = Math.round(window.scrollY / window.innerHeight) * window.innerHeight;
+        window.scrollTo({
+            top: scrollPosition,
+            behavior: 'smooth'
+        });
+    }, 500);
+}
+
+// Mute videos by default and handle mobile controls
+document.querySelectorAll('video').forEach(video => {
+    video.muted = true;
+
+    if (isMobile()) {
+        video.controls = false;
+
+        // Hide play button on mobile devices
+        video.addEventListener('play', () => {
+            video.removeAttribute('controls');
+        });
+    }
+
+    video.addEventListener('play', () => {
+        video.setAttribute('controls', '');
+    });
+
+    video.addEventListener('pause', () => {
+        video.removeAttribute('controls');
+    });
+
+    video.addEventListener('ended', () => {
+        video.removeAttribute('controls');
+    });
+});
+
+// Ensure video continues to play in background after closing popup
+function handleVideoPlayback() {
+    const videos = document.querySelectorAll('video');
+    videos.forEach((video) => {
+        if (isInViewport(video)) {
+            video.play();
+        } else {
+            video.pause();
+        }
+    });
+}
+
+window.addEventListener('scroll', handleVideoPlayback);
+handleVideoPlayback();
 
 // Function to randomize the video timestamp
 function randomizeVideoStartTime(videoId) {
     var video = document.getElementById(videoId);
     if (video) {
-        video.muted = true; // Mute the video
+        video.muted = true;
         video.addEventListener('loadedmetadata', function() {
-            var minTime = 300; // 30 seconds after the beginning
-            var maxTime = video.duration - 300; // 30 seconds before the end
+            var minTime = 300;
+            var maxTime = video.duration - 300;
             var randomTime = Math.random() * (maxTime - minTime) + minTime;
             video.currentTime = randomTime;
         });
@@ -32,15 +122,15 @@ function randomizeVideoStartTime(videoId) {
 function playVideoFromStart(videoId) {
     var video = document.getElementById(videoId);
     if (video) {
-        video.currentTime = 0; // Start video from the beginning
+        video.currentTime = 0;
         video.play().then(() => {
             if (video.requestFullscreen) {
                 video.requestFullscreen();
-            } else if (video.mozRequestFullScreen) { // Firefox
+            } else if (video.mozRequestFullScreen) {
                 video.mozRequestFullScreen();
-            } else if (video.webkitRequestFullscreen) { // Chrome, Safari & Opera
+            } else if (video.webkitRequestFullscreen) {
                 video.webkitRequestFullscreen();
-            } else if (video.msRequestFullscreen) { // IE/Edge
+            } else if (video.msRequestFullscreen) {
                 video.msRequestFullscreen();
             }
         }).catch((error) => {
@@ -93,10 +183,7 @@ function handleVideoPlayback() {
     });
 }
 
-// Add event listener for scroll event
 window.addEventListener('scroll', handleVideoPlayback);
-
-// Initial call to handle video playback on page load
 handleVideoPlayback();
 
 // Randomize the order of video sections on page load
@@ -107,14 +194,12 @@ document.addEventListener('DOMContentLoaded', function() {
         container.appendChild(sections.splice(Math.floor(Math.random() * sections.length), 1)[0]);
     }
 
-    // Randomize the start time of videos on page load
     var videos = document.querySelectorAll('video');
     videos.forEach(function(video) {
         randomizeVideoStartTime(video.id);
     });
 });
 
-// Event listener for the "Відео" buttons
 document.querySelectorAll('.video-btn').forEach(button => {
     button.addEventListener('click', function() {
         var videoId = this.getAttribute('onclick').match(/'([^']+)'/)[1];
@@ -125,6 +210,7 @@ document.querySelectorAll('.video-btn').forEach(button => {
 document.getElementById('scroll-button').addEventListener('click', function() {
     document.getElementById('community').scrollIntoView({ behavior: 'smooth' });
 });
+
 
 var accordionButtons = document.querySelectorAll('.accordion-button');
 accordionButtons.forEach(function(button) {
