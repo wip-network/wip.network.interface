@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ʕ·͡ᴥ·ʔ</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/x-icon" href="Very_sad_emoji_icon_png_large.ico"> <!-- Add this line -->
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ʕ·͡ᴥ·ʔ</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="icon" type="image/x-icon" href="Very_sad_emoji_icon_png_large.ico">
+    </head>
 <body>
 
         <!-- Menu Button -->
                 <!-- Menu Button -->
                 <div class="menu" onclick="this.classList.toggle('open')">
-                    <div class="button" onclick="showInfoPopup()">Поцікавлюсь-ка</div>
-                    <div class="button" onclick="showJoinPopup()">Доєднаюсь-ка</div>
+                    <div class="button" onclick="showInfoPopup()">Поцікавлюсь</div>
+                    <div class="button" onclick="showJoinPopup()">Доєднаюсь</div>
                 </div>
 
                 <div class="popup" id="info-popup">
@@ -96,13 +96,12 @@
                         <span class="close" onclick="hideJoinPopup()">&times;</span>
                         <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeny7gpPZrf2l1vFphojp4MutcZVIarhSzmX6xYhj_6um8WKg/viewform?embedded=true" width="640" height="991" frameborder="0" marginheight="0" marginwidth="0">Загрузка…</iframe>
                     </div>
-                </div> 
-            </div>
-        </div>
+                </div>
+ 
         <!-- Sections -->
         <section class="section" id="section1">
             <div class="video-container">
-                <video id="video1" autoplay loop class="section-video" poster="POSTS\POST.VLADA\Screenshot 2024-06-19 200437.png">
+                <video id="video1" autoplay loop class="section-video" poster="POSTS/POST.VLADA/Screenshot 2024-06-19 200437.png">
                     <source src="https://storage.googleapis.com/videos_wip/V_ruination1%20-%20HD%201080p.mov" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
@@ -112,10 +111,9 @@
                     <h2>руйнація</h2>
                     <p class="author">Влад(а)</p>
                 </div>
-                <p class="description">Західна сучасність, орієнтована на майбутнє, та її швидкості навряд чи можуть врахувати «атавістичні» перерви воєн. 
-                    Війна повертає наші обличчя до історії та її матеріальності, змушуючи побачити крихкість світлого майбутнього...</p>
-                <button class="popup-btn" onclick="showPopup('popup1')">Допис</button>
-                <button class="video-btn" onclick="playVideo('video1')">Відео</button>
+                <p class="description">Західна сучасність, орієнтована на майбутнє, та її швидкості навряд чи можуть врахувати «атавістичні» перерви воєн. Війна повертає наші обличчя до історії та її матеріальності, змушуючи побачити крихкість світлого майбутнього...</p>
+                <button class="popup-btn" data-popup-id="popup1">Допис</button>
+                <button class="video-btn" data-video-id="video1">Відео</button>
             </div>
             <div class="popup" id="popup1">
                 <div class="popup-content">
@@ -157,8 +155,8 @@
                 <p class="description">На пляжі або в лісі, коли закриваєш очі, чуєш шум води, вітер, шурхіт листя, комах. 
                     Ще чуєш моторний човен, рингтон, автотрасу, дзижчання дрона, завод. 
                     Коли закриваєш очі і просто слухаєш, звуки змішуються; м'яко приходить, що вся ця природа...</p>
-                <button class="popup-btn" onclick="showPopup('popup2')">Допис</button>
-                <button class="video-btn" onclick="playVideo('video2')">Відео</button>
+                    <button class="popup-btn" data-popup-id="popup2">Допис</button>
+                    <button class="video-btn" data-video-id="video2">Відео</button>
             </div>
             <div class="popup" id="popup2">
                 <div class="popup-content">
@@ -194,8 +192,8 @@
                     проблеми: втрата дому та близьких,
                     страх невідомого і недовіра до
                     оточуючих...</p>
-                <button class="popup-btn" onclick="showPopup('popup3')">Допис</button>
-                <button class="video-btn" onclick="playVideo('video3')">Відео</button>
+                    <button class="popup-btn" data-popup-id="popup3">Допис</button>
+                    <button class="video-btn" data-video-id="video3">Відео</button>
             </div>
             <div class="popup" id="popup3">
                 <div class="popup-content">
@@ -232,8 +230,8 @@
                     <p class="author">Сіль Саломії та Максим Світло</p>
                 </div>
                 <p class="description">Ressentiment кипить. Землі насильства. Далі йдуть не послідовності, а вібрації, які залишають сліди на різних датчиках. ...</p>
-                <button class="popup-btn" onclick="showPopup('popup4')">Допис</button>
-                <button class="video-btn" onclick="playVideo('video4')">Відео</button>
+                <button class="popup-btn" data-popup-id="popup4">Допис</button>
+                <button class="video-btn" data-video-id="video4">Відео</button>
             </div>
             <div class="popup" id="popup4">
                 <div class="popup-content">
