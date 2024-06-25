@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Mute videos by default and handle mobile controls
     document.querySelectorAll('video').forEach(video => {
         video.muted = true;
-        video.autoplay = true; // Ensure autoplay is enabled
+        video.autoplay = true;
 
         video.addEventListener('play', () => {
             video.setAttribute('controls', '');
@@ -94,6 +94,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function togglePopup() {
+        var popup = document.getElementById('info-popup');
+        popup.classList.toggle('open');
+        if (popup.style.display === 'flex') {
+            popup.style.display = 'none';
+        } else {
+            popup.style.display = 'flex';
+        }
+    }
+
+    document.getElementById('info-button').addEventListener('click', togglePopup);
+
     function showInfoPopup() {
         showPopup('info-popup');
     }
@@ -146,3 +158,13 @@ document.addEventListener('DOMContentLoaded', () => {
     window.hidePopup = hidePopup;
     window.playVideoFromStart = playVideoFromStart;
 });
+
+function togglePopup() {
+    var popup = document.getElementById('info-popup');
+    popup.classList.toggle('open');
+    if (popup.style.display === 'flex') {
+        popup.style.display = 'none';
+    } else {
+        popup.style.display = 'flex';
+    }
+}

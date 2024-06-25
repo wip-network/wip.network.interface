@@ -1,5 +1,3 @@
-
-
 html, body {
   scroll-behavior: smooth;
   overscroll-behavior-y: contain; /* Prevents bounce effect on touchscreens */
@@ -18,8 +16,6 @@ html, body {
   display: flex;
   flex-direction: column; /* Arrange sections vertically */
   height: 100%;
-  scroll-snap-type: mandatory;
-  scroll-snap-points-y: repeat(100vh);
   scroll-snap-type: y mandatory;
   overflow-y: scroll; /* Enable scrolling */
 }
@@ -56,96 +52,96 @@ body, html {
   -ms-overflow-style: none; /* No arrows in scrollbars */
 }
 
-.menu {
-  position: fixed; /* Fixed position to make it stay visible on scroll */
-  bottom: 30px; /* Positioned 30px from the bottom */
-  left: 50%; /* Centered horizontally */
-  transform: translateX(-50%); /* Offset by 50% of its width to center it */
-  padding: 30px; /* Padding inside the menu button */
-  background: #e8e8f348; /* Light background color */
-  border-radius: 100%; /* Circular shape */
-  cursor: pointer; /* Pointer cursor for clickability */
+/* Header Styles */
+.main-header {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center content horizontally */
+  position: fixed;
+  top: 20px;
+  left: 88%;
+  transform: translateX(-50%); /* Center the header on the screen */
+  width: 300px; /* Adjust width as needed */
+  height: 50px;
+  background-color: rgba(255, 255, 255, 0.26);
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
   box-shadow: 2px 0px 5px rgba(55, 84, 170, 0.15), 
-              0px 0px 20px rgb(255, 255, 255), 
-              inset 10px 0px 5px rgba(5, 201, 77, 0), 
-              inset 10px 0px 2px rgba(255, 255, 255, 0), 
-              10px 10px 4px rgba(255, 255, 255, 0); /* Shadow effects for depth */
-  z-index: 1000; /* Ensure it's above other elements */
-  transition: opacity 2.3s ease, transform .3s ease; /* Slightly slower and smoother transition */
+  0px 0px 5px rgb(255, 255, 255), 
+  inset 10px 0px 5px rgba(5, 201, 77, 0), 
+  inset 10px 0px 2px rgba(255, 255, 255, 0), 
+  10px 10px 4px rgba(255, 255, 255, 0);
+
 }
 
-.menu::before, .menu::after {
-  content: "";
-  background: #ffffff; /* Color for the lines */
-  border-radius: 5px; /* Rounded edges */
-  width: 30px; /* Width of the lines */
-  height: 5px; /* Height of the lines */
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%); /* Center the lines */
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+
+  color: white;
 }
 
-.menu::before {
-  transform: translate(-50%, -50%) rotate(0deg);
-}
-
-.menu::after {
-  transform: translate(-50%, -50%) rotate(-90deg);
-}
-
-.menu.open::before {
-  transform: translate(-50%, -50%) rotate(45deg); /* Rotate to form 'X' */
-}
-
-.menu.open::after {
-  transform: translate(-50%, -50%) rotate(-45deg); /* Rotate to form 'X' */
-}
-
-/* Button Styles */
-.button {
-  display: inline-block; /* Ensure the button takes the correct space */
+#info-button {
+  display: inline-block;
   width: 120px;
   height: 40px;
+  margin-right: 50px;
   background: #e8e8f348;
   border-radius: 10px;
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  box-shadow: inherit;
-  opacity: 0;
-  pointer-events: none;
   text-align: center;
   line-height: 40px;
   font-size: 14px;
   color: #ffffffe1;
-  transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-  z-index: -1;
-  text-decoration: none; /* Ensure no underline */
+  transition: background 0.3s ease;
 }
 
-.menu.open .button {
-  opacity: 1;
-  pointer-events: auto;
-  z-index: 1001;
-}
-
-.menu.open .button:nth-child(1) {
-  transform: translate(-50%, -60px) translateX(-100px); /* Bottom-left for triangular layout */
-}
-
-.menu.open .button:nth-child(2) {
-  transform: translate(-50%, -60px) translateX(100px); /* Bottom-right for triangular layout */
-}
-
-.button:hover {
-  transform: translate(-50%, 0) scale(1.1);
+#info-button:hover {
   background: #ffffff9c;
 }
 
-/* Add these styles to your existing CSS */
-/* Add these styles to your existing CSS */
+/* Popup Styles */
+.popup {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 50px; /* Adjust top position to start below the header */
+  width: 100vw;
+  height: calc(100vh - 50px); /* Adjust height to exclude the header */
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  justify-content: center;
+  align-items: center;
+  z-index: 999; /* Higher z-index to ensure it's on top */
+  overflow: hidden;
+}
+
+.popup.open {
+  display: flex;
+}
+
+.popup-content {
+  background-color: #fff; /* White background for content */
+  font-size: 20px;
+  width: 90vw; /* Adjust width to ensure responsiveness */
+  max-width: 800px; /* Maximum width for large screens */
+  max-height: 90vh; /* Maximum height to ensure it fits within the viewport */
+  color: #000;
+  overflow-y: auto;
+  padding: 30px;
+  border-radius: 20px;
+  text-align: left;
+  position: relative; /* Use relative positioning within fixed parent */
+}
+
+.popup .close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+/* Section Styles */
 .section {
   width: 100%;
   height: 100vh;
@@ -157,8 +153,7 @@ body, html {
   display: flex;
   align-items: center;
   scroll-snap-align: start; 
-  color: #ffffff; /* Set default text color to white */
-  
+  color: #ffffff;
 }
 
 /* Invert text color when section has a background image */
@@ -179,7 +174,7 @@ body, html {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* Center the video */
+  transform: translate(-50%, -50%);
   min-width: 100%;
   min-height: 100%;
   width: auto;
@@ -188,12 +183,10 @@ body, html {
 
 .content {
   position: relative;
-  margin-right: 1200px;
   z-index: 200;
-  text-shadow: #000000;
+  text-shadow: 2px 2px 4px #000; /* Add text shadow for readability */
 }
 
-/* Additional styles for the sections go here */
 #section1 { background: #f8b400; }
 #section2 { background-color: #6a0572; }
 #section3 { background-color: #4a90e2; }
@@ -202,11 +195,6 @@ body, html {
 
 .header h2, .header .author, .description {
   color: inherit;
-}
-
-
-.header .author {
-  font-size: 30px;
 }
 
 .header .author {
@@ -218,13 +206,12 @@ body, html {
   font-size: 20px;
 }
 
-
-.video-btn{
- width: 100px;
+.video-btn {
+  width: 100px;
   height: 45px;
   border: none;
   color: #ffffff;
-  background: #e8e8f348; /* Light background color */
+  background: #e8e8f348;
   font-size: 20px;
   cursor: pointer;
   bottom: 25px;
@@ -235,10 +222,11 @@ body, html {
               0px 0px 5px rgb(255, 255, 255), 
               inset 10px 0px 5px rgba(5, 201, 77, 0), 
               inset 10px 0px 2px rgba(255, 255, 255, 0), 
-              10px 10px 4px rgba(255, 255, 255, 0); /* Shadow effects for depth */
+              10px 10px 4px rgba(255, 255, 255, 0);
 }
+
 .video-btn:hover {
-  background: #ffffff9c; /* Change background color on hover for visual feedback */
+  background: #ffffff9c;
 }
 
 .popup-btn {
@@ -246,7 +234,7 @@ body, html {
   height: 45px;
   border: none;
   color: #ffffff;
-  background: #e8e8f348; /* Light background color */
+  background: #e8e8f348;
   font-size: 20px;
   cursor: pointer;
   bottom: 205px;
@@ -257,60 +245,23 @@ body, html {
               0px 0px 5px rgb(255, 255, 255), 
               inset 10px 0px 5px rgba(5, 201, 77, 0), 
               inset 10px 0px 2px rgba(255, 255, 255, 0), 
-              10px 10px 4px rgba(255, 255, 255, 0); /* Shadow effects for depth */
+              10px 10px 4px rgba(255, 255, 255, 0);
 }
+
 .popup-btn:hover {
-  background: #ffffff9c; /* Change background color on hover for visual feedback */
+  background: #ffffff9c;
 }
-
-.popup {
-  display: none;
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100vw; /* Full viewport width */
-  height: 100vh; /* Full viewport height */
-  background-color: rgb(255, 255, 255); /* Semi-transparent background */
-  justify-content: center;
-  align-items: center;
-  z-index: 1000; /* Higher z-index to ensure it's on top */
-  overflow: hidden; /* Prevent scrolling on the body when popup is open */
-}
-
-.popup-content {
-  background-color: rgb(255, 255, 255); /* White background for content */
-  font-size: 20px;
-  width: 100vw; /* Full viewport width */
-  height: 100vh; /* Full viewport height */
-  color: #000000;
-  overflow-y: auto; /* Enable vertical scrolling if content exceeds height */
-  padding: 30px;
-  margin-top: 100px;
-  padding-bottom: 100px;
-  border-radius: 5px;
-  text-align: left;
-  position: relative; /* Use relative positioning within fixed parent */
-}
-
-.popup .close {
-  position: fixed;
-  top: 5px;
-  right: 10px;
-  font-size: 100px;
-  cursor: pointer;
-}
-
 
 /* Responsive styles */
-@media (max-width: 1440px) {
+@media (max-width: 600px) {
   .section {
     height: 100vh;
   }
   .section-video {
-    position: relative; /* Ensure relative positioning */
-    display: flex; /* Use flexbox for centering */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     min-width: 100%;
     min-height: 100%;
   }
@@ -322,14 +273,12 @@ body, html {
   }
 
   .popup-content {
-    width: 100vw; /* Full viewport width */
-    height: 100vh; /* Full viewport height */
-    margin-top:100px;
+    width: 90vw;
+    height: 90vh;
   }
 }
 
 @media (max-width: 600px) {
-
   .video-btn {
     width: 50%;
     margin-top: 10px;
@@ -337,30 +286,52 @@ body, html {
     padding: 10px;
   }
 
+  .popup-content {
+    padding: 15px;
   }
-  @media (max-width: 1440px) {
+}
 
-    .content {
-      top: 100px;
-      margin-top: -500px;
-      margin-right: 30px;
-    }
-    
-  
-    }
-    @media (max-width: 1440px) {
+@media (max-width: 600px) {
+  .content {
+    top: 100px;
+    margin-top: -500px;
+    margin-right: 30px;
+  }
+}
 
-      .video-container {
-        position: left;
-      }
-      
-    
-      }
+@media (max-width: 600px) {
+  .video-container {
+    position: left;
+  }
+}
 
-      @media (max-width: 600px) {
-        .popup-content iframe {
-            width: 100%;
-            height: 100%;
-        }
-    }
-    
+@media (max-width: 600px) {
+  .popup-content iframe {
+    width: 100vw;
+    height: 100vh;
+  }
+}
+
+@media (max-width: 600px) {
+  .main-header {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center content horizontally */
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%); /* Center the header on the screen */
+    width: auto; /* Adjust width as needed */
+    height: 50px;
+    background-color: rgba(255, 255, 255, 0.26);
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    padding: 5px 10px;
+    box-shadow: 2px 0px 5px rgba(55, 84, 170, 0.15), 
+    0px 0px 5px rgb(255, 255, 255), 
+    inset 10px 0px 5px rgba(5, 201, 77, 0), 
+    inset 10px 0px 2px rgba(255, 255, 255, 0), 
+    10px 10px 4px rgba(255, 255, 255, 0);
+  }
+}
