@@ -59,9 +59,9 @@ body, html {
   justify-content: center; /* Center content horizontally */
   position: fixed;
   top: 20px;
-  left: 88%;
+  left: 90%;
   transform: translateX(-50%); /* Center the header on the screen */
-  width: 300px; /* Adjust width as needed */
+  width: 220px; /* Adjust width as needed */
   height: 50px;
   background-color: rgba(255, 255, 255, 0.26);
   border-radius: 10px;
@@ -86,7 +86,7 @@ body, html {
   display: inline-block;
   width: 120px;
   height: 40px;
-  margin-right: 50px;
+  margin-right: 20px;
   background: #e8e8f348;
   border-radius: 10px;
   text-align: center;
