@@ -1,0 +1,178 @@
+body {
+    font-family: "Arial Narrow", monospace;
+    background-color: #eaf1f4;
+    color: #3d2c36;
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+    
+}
+
+.container {
+    margin: auto;
+    padding: 20px;
+    font-style: normal;
+}
+
+.intro-section {
+    text-align: left;
+    padding: 20px;
+    background-color: #faf9f5;
+}
+
+.intro-text {
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+.intro-text ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.accordion {
+    font-family: "Arial Narrow", monospace;
+    font-size: large;
+    background-color: #f6f1f0;
+    border: 0.1px dashed #666;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    text-align: left;
+    outline: none;
+    transition: background-color 0.2s ease;
+}
+
+.accordion:hover {
+    background-color: #EECAD5;
+}
+
+.panel {
+    padding: 10px;
+    font-size: 19px;
+    display: none;
+    background-color: #e7dedc;
+}
+
+.panel.show {
+    display: block;
+}
+
+.corner-button {
+    position: fixed;
+    padding: 5px 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    text-align: center;
+    background:transparent;
+}
+
+.corner-button:hover {
+    background-color: #5b5151;
+}
+
+.button-syllabus {
+    color: #eb4e7d;
+    top: 10px;
+    left: 10px;
+    text-decoration: none;
+    
+
+}
+
+.button-calendar {
+    color: #f4664d;
+    top: 10px;
+    right: 10px;
+}
+
+.button-prompts {
+    color: #f5ba24;
+    bottom: 10px;
+    left: 10px;
+}
+
+.button-repository {
+    color: #4cb8f2;
+    bottom: 10px;
+    right: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+}
+
+a {
+    text-decoration: none;
+    font-size: 10px;
+}
+
+.doc-content {
+    max-width: 800px;
+    padding: 20px;
+    text-align: left;
+}
+
+.c1 {
+    margin-bottom: 20px;
+}
+
+.c0 {
+    font-size: 16px;
+    line-height: 1.6;
+}
+iframe {
+    display: block;
+    margin: 20px auto;  /* Center the iframe */
+    width: 100%;        /* Full width to ensure responsiveness */
+    max-width: 1200px;  /* Optional: set a maximum width */
+    height: 80vh;       /* Set the height to 80% of the viewport height */
+    border: none;
+}
+
+
+.h2 {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Styling for the Newsletter Section */
+.newsletter-section {
+    background-color: #EFEFEF; /* Use the desired background color */
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.newsletter-section h2 {
+    color: #3D2C36;
+}
+
+.newsletter-content form {
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.newsletter-content input[type="email"] {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #390c0c;
+    border-radius: 4px;
+    width: 300px;
+}
+
+.newsletter-content button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #390c0c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.newsletter-content button:hover {
+    background-color: #5b5151;
+}
